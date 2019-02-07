@@ -1,22 +1,17 @@
-///Book Constructor
+class Book{
+  constructor(title,author,isbn){
+    this.title  = title;
+    this.author = author;
+    this.isbn  =isbn;
 
-function Book(titel,author,isbn){
-
-  this.titel = titel;
-  this.author = author;
-  this.isbn = isbn;
+  }
 
 }
 
+class UI{
 
-///UI Constructor
+  addBooktoList(book){
 
-
-function UI(){
-  //EMPTY FUNCTION , EVERYTHING WILL BE INSIDE PROTOTYPE
-}
-//ADD book list
-UI.prototype.addBookToList = function(book){
   const list  = document.getElementById('book-list');
   //Create element
   const row =document.createElement('tr');
@@ -28,39 +23,37 @@ UI.prototype.addBookToList = function(book){
   <td><a href= "#" class ="delete">X</a></td>
   `
   list.appendChild(row);
+  }
 
-}
-UI.prototype.clearFields = function(){
-  document.getElementById('title').value = '';
-  document.getElementById('author').value = '';
-  document.getElementById('isbn').value = '';
+  showAlert(msg,class_name){
+    const div = document.createElement('div');
+    div.className = `alert ${class_name}`;
+    div.appendChild(document.createTextNode(msg));
+    const container = document.querySelector('.container');
+    const  form = document.querySelector('#book-form');
+    container.insertBefore(div,form);
+    setTimeout(function(){
+      document.querySelector('.alert').remove();
+    },2500);
+  }
 
-}
+  deleteBook(target){
 
-UI.prototype.showAlert = function(msg,class_name){
-  const div = document.createElement('div');
-  div.className = `alert ${class_name}`;
-  div.appendChild(document.createTextNode(msg));
-  const container = document.querySelector('.container');
-  const  form = document.querySelector('#book-form');
-  container.insertBefore(div,form);
-
-  setTimeout(function(){
-    document.querySelector('.alert').remove();
-  },2500);
-
-
-
-}
-UI.prototype.deleteBook = function(target){
     if(target.className === 'delete'){
 
       target.parentElement.parentElement.remove();
     }
 
+  }
+
+  clearFields(){
+    document.getElementById('title').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('isbn').value = '';
+
+  }
+
 }
-
-
 //Event listeners
 document.getElementById("book-form").addEventListener('submit',function(e){
   //Get form values
@@ -74,13 +67,14 @@ document.getElementById("book-form").addEventListener('submit',function(e){
 //Instantiate UI object
 
   const ui = new UI();
+  console.log(ui);
 
   //Validation
   if(titel === '' || author === '' || isbn === ''){
       ui.showAlert('Please fill in all fields','error');
   }else{
       //ADD book to list
-    ui.addBookToList(book);
+    ui.addBooktoList(book);
     ui.showAlert('Book was added !','success');
     ui.clearFields();
   }
@@ -105,7 +99,3 @@ const ui = new UI();
   ui.showAlert('Book was deleted!','success');
   e.preventDefault();
 })
-
-
-
-

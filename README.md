@@ -3,4 +3,4 @@ ES6 book list project , demonstrating the difference between ES6 (OOP) and ES5(h
     
     
     
-    <a href = 'https://anvarbeyaze.github.io/BookList-Project-ES6/'>Live Preview</a>
+    Live Preview - https://anvarbeyaze.github.io/BookList-Project-ES6/
